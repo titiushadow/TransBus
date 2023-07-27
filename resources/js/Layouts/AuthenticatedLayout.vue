@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="d-flex justify-start mb-5 mx-5 fixed-bottom">
+    <div class="d-flex justify-end mx-5">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ $page.props.auth.user.name }}

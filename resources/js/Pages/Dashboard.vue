@@ -6,8 +6,8 @@
 
 <template>
     <Head title="Home" />
-
-    <AuthenticatedLayout>
-        <Sidebar />
-    </AuthenticatedLayout>
+    <Sidebar />
+    <main class="main">
+        <h1>Estou na pagina inicial</h1>
+    </main>
 </template>

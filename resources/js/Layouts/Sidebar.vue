@@ -1,163 +1,226 @@
 <template>
     <div>
-    <div class="sidebar">
-            <ul class="sidebar-menu">
-                <H5>Cadastros</H5>
-                <li>
-                    <a href="#" class="nav-link">
-                        <span class="icon">
-                            <box-icon type='solid' name='user'></box-icon>
-                        </span>
-                        Alunos
-                    </a>
-                </li>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon name='walk'></box-icon>
-                    </span>
-                    Rotas
-                </a>
-                </li>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon name='car' type='solid' ></box-icon>
-                    </span>
-                    Motoristas
-                </a>
-                </li>
-                <H5 class="mt-3">Consultas</H5>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon type='solid' name='user'></box-icon>
-                    </span>
-                    Alunos
-                </a>
-                </li>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon name='walk'></box-icon>
-                    </span>
-                    Rotas
-                </a>
-                </li>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon name='car' type='solid' ></box-icon>
-                    </span>
-                    Motoristas
-                </a>
-                </li>
-                <H5 class="mt-3">Validações</H5>
-                <li>
-                <a href="#" class="nav-link">
-                    <span class="icon">
-                        <box-icon name='dollar' ></box-icon>
-                    </span>
-                    Pagamentos
-                </a>
-                </li>
-                <AuthenticatedLayout />
-            </ul>
-        </div>
+        <nav class="sidebar">
+            <Link :href="route('dashboard')" class="logo">Transbus</Link>
+            <div class="menu-section">
+                <h5 class="text-white">Cadastros</h5>
+                <ul class="menu-items">
+                    <li class="item">
+                        <Link :href="route('CadAlunos')"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos </Link>
+                    </li>
+
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='walk'></box-icon>Rotas</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='car'></box-icon>Motoristas</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h5 class="text-white">Consultas</h5>
+                <ul class="menu-items">
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='walk'></box-icon>Rotas</a>
+                    </li>
+
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='car'></box-icon>Motoristas</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <h5 class="text-white">Validações</h5>
+                <ul class="menu-items">
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='dollar'></box-icon>Pagamentos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="navbar">
+            <box-icon name='arrow-back' id="sidebar-close"></box-icon>
+            <AuthenticatedLayout />
+        </nav>
     </div>
 </template>
 
-<script>
-    import AuthenticatedLayout from './AuthenticatedLayout.vue';
 
-    export default {
+<script>
+import AuthenticatedLayout from './AuthenticatedLayout.vue';
+import { Link } from '@inertiajs/vue3';
+
+export default {
     name: "Sidebar",
-    components: { AuthenticatedLayout }
+    components: { AuthenticatedLayout, Link },
+    mounted() {
+        const sidebar = document.querySelector(".sidebar");
+        const sidebarClose = document.querySelector("#sidebar-close");
+        const menu = document.querySelector(".menu-content");
+        const menuItems = document.querySelectorAll(".submenu-item");
+        const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+
+        sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+        menuItems.forEach((item, index) => {
+            item.addEventListener("click", () => {
+                menu.classList.add("submenu-active");
+                item.classList.add("show-submenu");
+                menuItems.forEach((item2, index2) => {
+                    if (index !== index2) {
+                        item2.classList.remove("show-submenu");
+                    }
+                });
+            });
+        });
+
+        subMenuTitles.forEach((title) => {
+            title.addEventListener("click", () => {
+                menu.classList.remove("submenu-active");
+            });
+        });
+    },
 }
 </script>
 
 <style>
-    :root {
-    --ig-separator: 219, 219, 219;
-    }
 
-    body {
-    font-family: Roboto, serif;
-    }
-
-    .sidebar {
-    width: 245px;
-    background-color: #ffffff;
-    padding-top: 35px;
-    position: fixed;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    border-right: 1px solid rgb(var(--ig-separator));
-    display: flex;
-    flex-direction: column;
-    }
-
-    .logo-wrapper {
-    width: 100%;
-    padding: 5px 25px;
-    margin-bottom: 20px;
-    }
-
-    .logo-wrapper img {
-    width: 105px;
-    }
-
-    .sidebar-menu {
-    font-size: 1rem;
-    list-style-type: none;
-    padding: 0 12px 20px 8px;
+* {
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 3;
-    }
-
-    .sidebar-menu.bottom {
-    flex-grow: 0;
-    margin-bottom: 40px;
-    }
-
-
-    .sidebar-menu li a.nav-link {
-    border-radius: 10px;
-    padding: 16px 15px;
-    color: #333333;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 260px;
+    background: #11101d;
+    padding: 15px;
+    z-index: 99;
+}
+.logo {
+    font-size: 25px;
+    padding: 0 15px;
+}
+.sidebar a {
+    color: #fff;
     text-decoration: none;
+}
+
+.menu-section {
+    margin-top: 40px;
+}
+
+.menu-content {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: 40px;
+}
+.menu-content::-webkit-scrollbar {
+    display: none;
+}
+.menu-items {
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    transition: all 0.4s ease;
+}
+.submenu-active .menu-items {
+    transform: translateX(-56%);
+}
+.menu-title {
+    color: #fff;
+    font-size: 14px;
+    padding: 15px 20px;
+}
+.item a,
+.submenu-item {
+    padding: 16px;
     display: flex;
     align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    border-radius: 12px;
+}
+.item i {
+    font-size: 12px;
+}
+.item a:hover,
+.submenu-item:hover,
+.submenu .menu-title:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.submenu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}
+.submenu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: calc(-100% - 26px);
+    height: calc(100% + 100vh);
+    background: #11101d;
+    display: none;
     }
-
-    .sidebar-menu li a.nav-link.active {
-    font-weight: bold;
-    }
-
-    .sidebar-menu li a.nav-link.active img.icon {
-    border: 2px solid black;
-    }
-
-    .sidebar-menu li a.nav-link .icon {
-    margin-right: 15px;
-    width: 24px;
-    height: 24px;
-    transition: all 0.2s ease-in-out;
-    }
-
-    .sidebar-menu li a.nav-link:hover {
-    background-color: #f5f5f5;
-    }
-
-    .sidebar-menu li a.nav-link:hover .icon {
-    transform: scale(1.08);
-    }
-
-    .rounded-circle {
-    border-radius: 100%;
-    }
+.show-submenu ~ .submenu {
+    display: block;
+}
+.submenu .menu-title {
+    border-radius: 12px;
+    cursor: pointer;
+}
+.submenu .menu-title i {
+    margin-right: 10px;
+}
+.navbar,
+.main {
+    left: 260px;
+    width: calc(100% - 260px);
+    transition: all 0.5s ease;
+    z-index: 1000;
+}
+.sidebar.close ~ .navbar,
+.sidebar.close ~ .main {
+    left: 0;
+    width: 100%;
+}
+.navbar {
+    position: fixed;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 25px;
+    background: #4070f4;
+    cursor: pointer;
+}
+.navbar #sidebar-close {
+    cursor: pointer;
+}
+.main {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 100;
+    background: #e7f2fd;
+}
+.main h1 {
+    color: #11101d;
+    font-size: 40px;
+    text-align: center;
+}
 </style>
