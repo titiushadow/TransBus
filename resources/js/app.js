@@ -1,4 +1,6 @@
-import './bootstrap';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'boxicons';
 import '../css/app.css';
 
 import { createApp, h } from 'vue';
