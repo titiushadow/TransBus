@@ -13,19 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('formularios', function (Blueprint $table) {
+        Schema::create('cad_users', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->string('instituicao');
             $table->string('periodo');
-            $table->string('foto');
+            $table->string('foto')->default('');
             $table->string('curso');
-            $table->string('cpf')->unique();
+            $table->string('cpf');
             $table->string('destino');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cad_users');
     }
 };

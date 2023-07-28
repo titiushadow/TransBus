@@ -9,6 +9,12 @@
 import Dropzone from 'dropzone';
 
 export default {
+props: {
+    value: {
+        type: String,
+        default: ''
+    }
+},
 mounted() {
     Dropzone.autoDiscover = false;
     this.initDropzone();
