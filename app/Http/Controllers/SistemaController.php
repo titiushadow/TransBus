@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CadUser; // Adicione esta linha de importação para a classe CadUser
+use App\Models\CadAluno;
 
 class SistemaController extends Controller
 {
@@ -14,7 +14,6 @@ class SistemaController extends Controller
 
     public function store(Request $request)
     {
-        // Valida os dados recebidos do formulário
         $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'instituicao' => 'required|string|max:255',
@@ -22,13 +21,11 @@ class SistemaController extends Controller
             'curso' => 'required|string|max:255',
             'cpf' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email|unique:cad_users',
+            'email' => 'required|string|max:255|email|unique:cad_alunos',
         ]);
 
-        // Cria um novo registro no banco de dados com os dados validados
-        CadUser::create($validatedData);
+        CadAluno::create($validatedData);
 
-        // Redireciona para a lista de usuários cadastrados ou outra página adequada
-        return redirect()->route('CadAlunos')->with('success', 'Usuário cadastrado com sucesso!');
+        return redirect()->route('CadAlunos')->with('success', 'Aluno cadastrado com sucesso!');
     }
 }

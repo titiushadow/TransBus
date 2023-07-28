@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('cad_users', function (Blueprint $table) {
+        Schema::table('cad_alunos', function (Blueprint $table) {
             $table->string('foto')->default('')->change();
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('cad_users', function (Blueprint $table) {
+        Schema::table('cad_alunos', function (Blueprint $table) {
             $table->string('foto')->change();
         });
     }

@@ -128,7 +128,7 @@ export default {
     },
     methods: {
         save() {
-            axios.post('/caduser', {
+            axios.post('/cad_alunos', {
                 nome: this.nome,
                 instituicao: this.instituicao,
                 periodo: this.periodo,

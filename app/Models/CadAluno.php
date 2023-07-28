@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CadUser extends Model
+class CadAluno extends Model
 {
     protected $fillable = [
         'nome',

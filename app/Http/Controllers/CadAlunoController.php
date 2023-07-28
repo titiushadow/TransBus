@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CadUser;
+use App\Models\CadAluno;
 use Illuminate\Http\Request;
 
-class CadUserController extends Controller
+class CadAlunoController extends Controller
 {
     public function index()
     {
-        // Retorna todos os registros da tabela "cad_users"
-        $users = CadUser::all();
-        return view('cad_users.index', compact('users'));
+        $users = CadAluno::all();
+        return view('cad_alunos.index', compact('users'));
     }
 
     public function create()
     {
-        // Retorna a view para criar um novo registro
-        return view('cad_users.create');
+        return view('cad_alunos.create');
     }
 
     public function store(Request $request)
@@ -31,14 +29,12 @@ class CadUserController extends Controller
             'curso' => 'required|string|max:255',
             'cpf' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
-            'email' => 'required|string|max:255|email|unique:cad_users',
+            'email' => 'required|string|max:255|email|unique:cad_alunos',
         ]);
 
-        // Cria um novo registro no banco de dados com os dados validados
-        CadUser::create($validatedData);
+        CadAluno::create($validatedData);
 
-        // Redireciona para a lista de usuários cadastrados
-        return redirect()->route('cad_users.index')->with('success', 'Usuário cadastrado com sucesso!');
+        return redirect()->route('cad_alunos.index')->with('success', 'Usuário cadastrado com sucesso!');
     }
 }
 
