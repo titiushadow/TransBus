@@ -23,7 +23,7 @@
                 <h5 class="text-white">Consultas</h5>
                 <ul class="menu-items">
                     <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos</a>
+                        <Link :href="route('index')"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos </Link>
                     </li>
 
                     <li class="item">
