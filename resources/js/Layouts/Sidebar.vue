@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="sidebar">
-            <Link :href="route('dashboard')" class="logo">Transbus</Link>
+            <Link :href="route('dashboard')" class="logo">TransBus</Link>
             <div class="menu-section">
                 <h5 class="text-white">Cadastros</h5>
                 <ul class="menu-items">
@@ -33,6 +33,10 @@
                     <li class="item">
                         <a href="#"><box-icon color='rgba(255,255,255)' name='car'></box-icon>Motoristas</a>
                     </li>
+
+                    <li class="item">
+                        <a href="#"><box-icon color='rgba(255,255,255)' name='bell'></box-icon>Avisos</a>
+                    </li>
                 </ul>
             </div>
 
@@ -46,7 +50,7 @@
             </div>
         </nav>
         <nav class="navbar">
-            <box-icon name='arrow-back' id="sidebar-close"></box-icon>
+            <box-icon name='left-arrow-alt' id="sidebar-close"></box-icon>
             <AuthenticatedLayout />
         </nav>
     </div>
@@ -56,6 +60,7 @@
 <script>
 import AuthenticatedLayout from './AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import 'boxicons';
 
 export default {
     name: "Sidebar",
@@ -74,9 +79,9 @@ export default {
                 menu.classList.add("submenu-active");
                 item.classList.add("show-submenu");
                 menuItems.forEach((item2, index2) => {
-                    if (index !== index2) {
-                        item2.classList.remove("show-submenu");
-                    }
+                if (index !== index2) {
+                    item2.classList.remove("show-submenu");
+                }
                 });
             });
         });
@@ -86,12 +91,11 @@ export default {
                 menu.classList.remove("submenu-active");
             });
         });
-    },
+    }
 }
 </script>
 
 <style>
-
 * {
     margin: 0;
     padding: 0;
@@ -119,15 +123,6 @@ export default {
     margin-top: 40px;
 }
 
-.menu-content {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    margin-top: 40px;
-}
-.menu-content::-webkit-scrollbar {
-    display: none;
-}
 .menu-items {
     height: 100%;
     width: 100%;
@@ -137,13 +132,8 @@ export default {
 .submenu-active .menu-items {
     transform: translateX(-56%);
 }
-.menu-title {
-    color: #fff;
-    font-size: 14px;
-    padding: 15px 20px;
-}
-.item a,
-.submenu-item {
+
+.item a {
     padding: 16px;
     display: flex;
     align-items: center;
@@ -151,21 +141,14 @@ export default {
     width: 100%;
     border-radius: 12px;
 }
+
 .item i {
     font-size: 12px;
 }
-.item a:hover,
-.submenu-item:hover,
-.submenu .menu-title:hover {
+.item a:hover {
     background: rgba(255, 255, 255, 0.1);
 }
-.submenu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
-    cursor: pointer;
-}
+
 .submenu {
     position: absolute;
     height: 100%;
@@ -179,13 +162,7 @@ export default {
 .show-submenu ~ .submenu {
     display: block;
 }
-.submenu .menu-title {
-    border-radius: 12px;
-    cursor: pointer;
-}
-.submenu .menu-title i {
-    margin-right: 10px;
-}
+
 .navbar,
 .main {
     left: 260px;

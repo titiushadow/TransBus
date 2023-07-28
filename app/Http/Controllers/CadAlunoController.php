@@ -2,22 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\CadAluno;
+use Illuminate\Http\Request;
 
-class SistemaController extends Controller
+class CadAlunoController extends Controller
 {
-    public function CadAlunos()
+    public function index()
     {
-        return inertia('Cadastros/CadAlunos');
+        $users = CadAluno::all();
+        return view('cad_alunos.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('cad_alunos.create');
     }
 
     public function store(Request $request)
     {
+        // Valida os dados recebidos do formulário
         $validatedData = $request->validate([
             'nome' => 'required|string|max:255',
             'instituicao' => 'required|string|max:255',
             'periodo' => 'required|string|max:255',
+            'foto' => 'required|string|max:255',
             'curso' => 'required|string|max:255',
             'cpf' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
@@ -26,6 +34,7 @@ class SistemaController extends Controller
 
         CadAluno::create($validatedData);
 
-        return redirect()->route('CadAlunos')->with('success', 'Aluno cadastrado com sucesso!');
+        return redirect()->route('cad_alunos.index')->with('success', 'Usuário cadastrado com sucesso!');
     }
 }
+
