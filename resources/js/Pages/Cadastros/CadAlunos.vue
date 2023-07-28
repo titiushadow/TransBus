@@ -1,5 +1,6 @@
 <template>
 <div>
+    <Head title="Cadastro Alunos" />
     <Sidebar />
     <main class="main">
     <div class="card text-center">
@@ -107,12 +108,14 @@
 import Sidebar from '@/Layouts/Sidebar.vue';
 import UploadImage from '@/Components/UploadImage.vue';
 import axios from 'axios';
+import { Head } from '@inertiajs/vue3';
 
 export default {
     name: 'CadAlunos',
     components: {
         Sidebar,
         UploadImage,
+        Head,
     },
     data() {
         return {
