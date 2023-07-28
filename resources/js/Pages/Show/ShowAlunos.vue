@@ -4,13 +4,27 @@
         <Sidebar />
 
         <main class="main flex-column">
-            <h1>Lista de Alunos</h1>
-            <ul>
-            <li v-for="aluno in alunos" :key="aluno.id">
-                {{ aluno.nome }} - {{ aluno.instituicao }} - {{ aluno.periodo }} - {{ aluno.curso }}
-                {{ aluno.cpf }} - {{ aluno.destino }} - {{ aluno.email }}
-            </li>
-            </ul>
+            <h3 class="text-center fw-bold">Lista de Alunos</h3>
+            <table class="table table-bordered w-50">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Instituição</th>
+                    <th scope="col">CPF</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <tr v-for="aluno in alunos" :key="aluno.id">
+                    <th scope="row">{{ aluno.id }}</th>
+                    <td>{{ aluno.nome }}</td>
+                    <td>{{ aluno.email }}</td>
+                    <td>{{ aluno.instituicao }}</td>
+                    <td>{{ aluno.cpf }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </main>
     </div>
     </template>
@@ -35,5 +49,5 @@
     </script>
 
     <style>
-    /* Adicione estilos conforme necessário */
+
     </style>
