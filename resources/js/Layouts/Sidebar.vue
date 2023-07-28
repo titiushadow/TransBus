@@ -50,7 +50,7 @@
             </div>
         </nav>
         <nav class="navbar">
-            <box-icon name='arrow-back' id="sidebar-close"></box-icon>
+            <box-icon name='left-arrow-alt' id="sidebar-close"></box-icon>
             <AuthenticatedLayout />
         </nav>
     </div>
@@ -60,6 +60,7 @@
 <script>
 import AuthenticatedLayout from './AuthenticatedLayout.vue';
 import { Link } from '@inertiajs/vue3';
+import 'boxicons';
 
 export default {
     name: "Sidebar",
