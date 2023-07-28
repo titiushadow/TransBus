@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="sidebar">
+        <nav class="sidebar" :class="{ close: isSidebarClosed }">
             <Link :href="route('dashboard')" class="logo">TransBus</Link>
             <div class="menu-section">
                 <h5 class="text-white">Cadastros</h5>
@@ -50,50 +50,59 @@
             </div>
         </nav>
         <nav class="navbar">
-            <box-icon name='left-arrow-alt' id="sidebar-close"></box-icon>
+            <box-icon name='left-arrow-alt' id="sidebar-close" @click="toggleSidebar"></box-icon>
             <AuthenticatedLayout />
         </nav>
     </div>
 </template>
 
 
-<script>
-import AuthenticatedLayout from './AuthenticatedLayout.vue';
-import { Link } from '@inertiajs/vue3';
-import 'boxicons';
+  <script>
+  import AuthenticatedLayout from './AuthenticatedLayout.vue';
+  import { Link } from '@inertiajs/vue3';
+  import 'boxicons';
 
-export default {
+  export default {
     name: "Sidebar",
     components: { AuthenticatedLayout, Link },
-    mounted() {
+    data() {
+      return {
+        isSidebarClosed: false
+      };
+    },
+    methods: {
+      toggleSidebar() {
+        this.isSidebarClosed = !this.isSidebarClosed;
         const sidebar = document.querySelector(".sidebar");
-        const sidebarClose = document.querySelector("#sidebar-close");
-        const menu = document.querySelector(".menu-content");
-        const menuItems = document.querySelectorAll(".submenu-item");
-        const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+        const navbar = document.querySelector(".navbar");
+        const main = document.querySelector(".main");
+        const menuTexts = document.querySelectorAll(".menu-section h5");
 
-        sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+        if (this.isSidebarClosed) {
+          sidebar.style.display = "none";
+          navbar.style.left = "0";
+          navbar.style.width = "100%";
+          main.style.left = "0";
+          main.style.width = "100%";
+        } else {
+          sidebar.style.display = "block";
+          navbar.style.left = "260px";
+          navbar.style.width = "calc(100% - 260px)";
+          main.style.left = "260px";
+          main.style.width = "calc(100% - 260px)";
+        }
 
-        menuItems.forEach((item, index) => {
-            item.addEventListener("click", () => {
-                menu.classList.add("submenu-active");
-                item.classList.add("show-submenu");
-                menuItems.forEach((item2, index2) => {
-                if (index !== index2) {
-                    item2.classList.remove("show-submenu");
-                }
-                });
-            });
-        });
-
-        subMenuTitles.forEach((title) => {
-            title.addEventListener("click", () => {
-                menu.classList.remove("submenu-active");
-            });
-        });
+        // Verificar se menuTexts existe antes de manipulá-lo
+        if (menuTexts.length > 0) {
+          menuTexts.forEach(text => {
+            text.style.display = this.isSidebarClosed ? "none" : "block";
+          });
+        }
+      }
     }
-}
-</script>
+  }
+  </script>
+
 
 <style>
 * {
@@ -199,5 +208,12 @@ export default {
     color: #11101d;
     font-size: 40px;
     text-align: center;
+}
+
+@media screen and (max-width: 320px) {
+    .sidebar {
+        width: 100vw;
+        position: relative;
+    }
 }
 </style>

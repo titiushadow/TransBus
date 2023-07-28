@@ -149,11 +149,30 @@ export default {
 
 <style scoped>
 .card {
-width: 50rem;
-height: 29rem;
+    width: 50rem;
+    height: 29rem;
 }
 
 .form-control:focus {
 box-shadow: none;
+}
+
+@media screen and (max-width: 320px)
+{
+    .card {
+        height: 100vh;
+        margin-top: 1rem;
+        border: none;
+    }
+
+    .main {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        z-index: 100;
+        background: #fff;
+    }
+
 }
 </style>
