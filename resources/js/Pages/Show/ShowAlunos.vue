@@ -3,7 +3,7 @@
         <Head title="Consultar Alunos" />
         <Sidebar />
 
-        <main class="main flex-column">
+        <section class="home">
             <h3 class="text-center fw-bold">Lista de Alunos</h3>
             <table class="table table-bordered w-50">
             <thead>
@@ -25,7 +25,7 @@
                     </tr>
                 </tbody>
             </table>
-        </main>
+        </section>
     </div>
     </template>
 

@@ -6,8 +6,8 @@
 <template>
     <Head title="Home" />
     <Sidebar />
-    <main class="main flex-column">
-        <div class="card text-center w-50">
+    <section class="home">
+        <div class="card text-center">
             <div class="card-header">
                 <h3 class="fw-bold">Aviso</h3>
             </div>
@@ -41,5 +41,5 @@
                 <a href="#" class="btn btn-success">Salvar</a>
             </div>
         </div>
-    </main>
+    </section>
 </template>
