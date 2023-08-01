@@ -6,7 +6,7 @@
 <template>
     <Head title="Home" />
     <Sidebar />
-    <section class="home">
+    <section class="d-flex justify-content-center align-items-center vh-100">
         <div class="card text-center">
             <div class="card-header">
                 <h3 class="fw-bold">Aviso</h3>
