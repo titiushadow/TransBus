@@ -59,6 +59,13 @@
                                 <span class="text nav-text">Motoristas</span>
                             </Link>
                         </li>
+
+                        <li class="nav-link d-flex">
+                            <Link class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZFJREFUSEvt1k9LFVEUAPCf+AEqBPdRSNBGXOgiIl0EQd+gRZsgcOFSBHWnILSsjbRo4ycQhDZBfyioCMSF2qL8AEFBtTbjwDwYRufN3DtPRPCsHsw953fvfXfm3CFnFENn5MqFL2GumPQz/E5dQA58BR8xVmD7mMLfFDwFvowlPELg5fiJF1jFnzYTaAs/wFOMNBT9gcfYbMLbwMtYaSpUeT6L9X45TfA0XieiMfwIk/hSl9sPjmdfS4co1X+P2znwfWylapXxE9g+qUa/Fcdh6r2ruf4CnqTCL3EvVyzyNvAwFY5DFYerS7zC3VT4De50UfG2bvL9/uMLOGfXz89WX8cHjOYss5QTTeMWvlXrnHS4bhSnsSvaswKfwV4Zr8LRZw8QvXeQ8QtXy726Csd7G6/RaUTUftcrXIWjlX06DbW4Hn2ug4fxHNcGjH8vbiaHdfCAvfpyTTeQauZ4cauInSnHP0Tv3Wk781Q46kZ/na8Aa1hsi8a4HDjybhYfhvgdH5rdFLQLnOocG5+74s7wf3miPB/OgoyfAAAAAElFTkSuQmCC"/>
+                                <span class="text nav-text">Avisos</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div class="bottom-content">

@@ -32,8 +32,8 @@ export default {
 name: 'DataTables',
     props: {
         alunos: {
-        type: Array,
-        required: true,
+            type: Array,
+            required: true,
         },
     },
     mounted() {
