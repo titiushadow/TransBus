@@ -2,6 +2,9 @@ import './sass/app.scss';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
+import 'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css';
+import 'datatables.net-select-bs5/css/select.bootstrap5.min.css';
 import 'boxicons';
 import '../css/app.css';
 
