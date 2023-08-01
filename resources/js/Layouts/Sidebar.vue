@@ -1,61 +1,77 @@
 <template>
     <div>
-        <nav class="sidebar">
-            <Link :href="route('dashboard')" class="logo">TransBus</Link>
-            <div class="menu-section">
-                <h5 class="text-white">Cadastros</h5>
-                <ul class="menu-items">
-                    <li class="item">
-                        <Link :href="route('CadAlunos')"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos </Link>
-                    </li>
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <div class="text logo-text">
+                        <Link :href="route('dashboard')" class="text-decoration-none text-dark">
+                            <span class="name">TransBus</span>
+                        </Link>
+                    </div>
+                </div>
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+            <div class="menu-bar">
+                <div class="menu">
+                    <div class="text logo-text">
+                        <span class="name">Cadastro</span>
+                    </div>
+                    <ul class="menu-links">
+                        <li class="nav-link d-flex">
+                            <Link :href="route('CadAlunos')" class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAa1JREFUSEvN1k2ITlEYB/DfyKCkJsmONGShRFnZMaVYWJimbBTKR0nZSbEcSXZmarBhhZIppWYxC1YslFBmVvKVUkoWbCR06t5per13nnOne3ud7fPc/+88vZ1z3j49Wn09ci0GXoIRbCk2PYN7+FNniLrwTtzC5g5kFofxLBevAw9hCssqwn9gD57m4LnwSnzA6iD0IzbhZ4TnwsdxIwor6un3vx/15sLXcDIKK+pXcDbqzYWv40QUVtQncCrqzYXPYzQKK+rncDnqzYXTmX0dhRVneSPeRr25cMq5iSNB4FWcidBUrwMvL26o/RXBaWPH8LtpuNzoIRyYd6Y/4w4e5IBlT52J6+SGvf89vA7D2IoNWNox0i+8w0tM4lM0cjTxNlzCviioo/6wuL3Sq9V1LQSnm2oc/TXRsj09FEdxu9v3VfBB3F0kOP+zdLT2Yrozqxu8Fu+xogE4RXzFeqT3em51g8dwuiG0jLmAixH8BWsahp9jx0LwIN40jJZxq/C96uZKf+aetASno/mqCt6FRy3Bu/G4Ch7A9pbgF/hWBbdk/hsbXZmtbaRn8F8SWDwfL/V22AAAAABJRU5ErkJggg=="/>
+                                <span class="text nav-text">Alunos</span>
+                            </Link>
+                        </li>
+                        <li class="nav-link">
+                            <Link class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAk1JREFUSEvd1knITXEYx/HPq0QylJSFTBvDAhtl2pgjG1GGjUgWJEqSEgsUkrKRjWQjFEoWSoaSDGVBypASSqYMhTIVPfW8dbq9955z3puUp273ntv//L7neZ7f//mfDv8oOv4RVzvgnliAEbiAx3WSaAd8FdMT9hPzcKUqvLvgMXjYADmHhf8tOCr1CKMKGa7Csb+dcegPwEwMx3XcqQqNdd3t8Tg8w+c6sOLaquDYMuHgzk9kGU4+hJ34WPcBysCDcRyzWgh/STdfrgMvAxf3aui+RQ8MaoC8wug6pW8FjrIGOOIgduEDbmBKF9kdxrqqWbcC38RkfMJQREljTH7N72A8xwPMT2A80K0q8GbgYrbbsTvFJjUIx4xeiSfoj+9ZpfOISfay2UM0A5/Cksx2WKF3G7PsnXoHsBlzcRr9CqBLmFMXHCVdhl44Urj5JJYWrlfjaF5HO9ZiBYZkv6PvXUaZqxtvip5GBTpjKsILxQjXz8bd3AVtg2MLvWtQCdcvx5sqhiquqZPxIpzJm+9hQv5+n22JnlaOOuD9aaQYlX2xA9uS9DuNVHl61QHHCTQNt3N/BzMO/hipfbLX0fNKUQUcDt+LTam4D1sL6nvyOrKOB/hWhVwGHosThX6+wMQGky3OPRy8mHRRkdJoBd6AyK53qlzLPfy6QXUknuZ/6/Oo7Da4OBp/YUtOrChnVxHOHpjDJIZKabTKOA75GZnl/RKli+nqWDe+lFry6hNGiWx/VBBaky9+McXOVljf7XeuKtot15S5um1AM4E/MGRsH+2TxhAAAAAASUVORK5CYII="/>
+                                <span class="text nav-text">Rotas</span>
+                            </Link>
+                        </li>
+                        <li class="nav-link">
+                            <Link class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAg1JREFUSEvt10uoT1EUx/HP9ZoYCIVuilLymBgw8SgGBoqZwgChFEIykeSRZHajPMqjyKsMzBiYEDEwoJRHSZh4DZQMJHm0ap/buafz///PObr+BvZsn7N+67vXXuusvU+PLo2eLnH9B/+1nW+31UOwDquwCDGvMn7iFi7iPH6VidqBD2F3FVIbm/04UAc8Bw+S4Cmu4UfFRQzFckxL0c7Gw6K2VcTHsAXfMQGfKkIzs7F4h+EIX1urgGMxbxPwOpbWhGbmN7AE79FbzHVZxAtwJ6mjuM41BG/AmaSdh/t5P2Xgo9iWcjoaXxqCx+AjIud92NkOPAIvMTHl6FRDaCbbhHF4nYrtW/YiH/FI3MTcP4S1kt/DYnwNgzw4GsXlQYJmblfgahEcH/u+QQZHMwnOgIjz4EeIIovPYDvG11zQh6SPTykKdVbSdwRPx/NkvAcHa4J34EjSzMfdquCpeJGMV+JKTfBGnE6a6HzRxWJ0jPgS9qaWeRzLaoKjN0ebfJJSlR0UHcE1OZXNS8G7cLiyi2aGsQtxaAyo6iioxxjWzGdHVTSOmXhVBMd8Pc7mXLxJ7a6j1xKDyZiUe74GF7J58ZBYmK4t2fv+nDQgFxtSXJ9u/3PgyHNcdbKxGScbRBuSOJlO5LQz8KxVxPF8Naak607cEj83BI/CWsS5HEdtf37Liqsho76sa78wvwHm7GMf/IDJ+wAAAABJRU5ErkJggg=="/>
+                                <span class="text nav-text">Motoristas</span>
+                            </Link>
+                        </li>
+                    </ul>
 
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='walk'></box-icon>Rotas</a>
-                    </li>
-
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='car'></box-icon>Motoristas</a>
-                    </li>
-                </ul>
+                    <div class="text logo-text">
+                        <span class="name">Consultas</span>
+                    </div>
+                    <ul class="menu-links">
+                        <li class="nav-link d-flex">
+                            <Link :href="route('ShowAlunos')" class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAa1JREFUSEvN1k2ITlEYB/DfyKCkJsmONGShRFnZMaVYWJimbBTKR0nZSbEcSXZmarBhhZIppWYxC1YslFBmVvKVUkoWbCR06t5per13nnOne3ud7fPc/+88vZ1z3j49Wn09ci0GXoIRbCk2PYN7+FNniLrwTtzC5g5kFofxLBevAw9hCssqwn9gD57m4LnwSnzA6iD0IzbhZ4TnwsdxIwor6un3vx/15sLXcDIKK+pXcDbqzYWv40QUVtQncCrqzYXPYzQKK+rncDnqzYXTmX0dhRVneSPeRr25cMq5iSNB4FWcidBUrwMvL26o/RXBaWPH8LtpuNzoIRyYd6Y/4w4e5IBlT52J6+SGvf89vA7D2IoNWNox0i+8w0tM4lM0cjTxNlzCviioo/6wuL3Sq9V1LQSnm2oc/TXRsj09FEdxu9v3VfBB3F0kOP+zdLT2Yrozqxu8Fu+xogE4RXzFeqT3em51g8dwuiG0jLmAixH8BWsahp9jx0LwIN40jJZxq/C96uZKf+aetASno/mqCt6FRy3Bu/G4Ch7A9pbgF/hWBbdk/hsbXZmtbaRn8F8SWDwfL/V22AAAAABJRU5ErkJggg=="/>
+                                <span class="text nav-text">Alunos</span>
+                            </Link>
+                        </li>
+                        <li class="nav-link d-flex">
+                            <Link class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAk1JREFUSEvd1knITXEYx/HPq0QylJSFTBvDAhtl2pgjG1GGjUgWJEqSEgsUkrKRjWQjFEoWSoaSDGVBypASSqYMhTIVPfW8dbq9955z3puUp273ntv//L7neZ7f//mfDv8oOv4RVzvgnliAEbiAx3WSaAd8FdMT9hPzcKUqvLvgMXjYADmHhf8tOCr1CKMKGa7Csb+dcegPwEwMx3XcqQqNdd3t8Tg8w+c6sOLaquDYMuHgzk9kGU4+hJ34WPcBysCDcRyzWgh/STdfrgMvAxf3aui+RQ8MaoC8wug6pW8FjrIGOOIgduEDbmBKF9kdxrqqWbcC38RkfMJQREljTH7N72A8xwPMT2A80K0q8GbgYrbbsTvFJjUIx4xeiSfoj+9ZpfOISfay2UM0A5/Cksx2WKF3G7PsnXoHsBlzcRr9CqBLmFMXHCVdhl44Urj5JJYWrlfjaF5HO9ZiBYZkv6PvXUaZqxtvip5GBTpjKsILxQjXz8bd3AVtg2MLvWtQCdcvx5sqhiquqZPxIpzJm+9hQv5+n22JnlaOOuD9aaQYlX2xA9uS9DuNVHl61QHHCTQNt3N/BzMO/hipfbLX0fNKUQUcDt+LTam4D1sL6nvyOrKOB/hWhVwGHosThX6+wMQGky3OPRy8mHRRkdJoBd6AyK53qlzLPfy6QXUknuZ/6/Oo7Da4OBp/YUtOrChnVxHOHpjDJIZKabTKOA75GZnl/RKli+nqWDe+lFry6hNGiWx/VBBaky9+McXOVljf7XeuKtot15S5um1AM4E/MGRsH+2TxhAAAAAASUVORK5CYII="/>
+                                <span class="text nav-text">Rotas</span>
+                            </Link>
+                        </li>
+                        <li class="nav-link d-flex">
+                            <Link class="d-flex align-items-center text-decoration-none gap-3">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAg1JREFUSEvt10uoT1EUx/HP9ZoYCIVuilLymBgw8SgGBoqZwgChFEIykeSRZHajPMqjyKsMzBiYEDEwoJRHSZh4DZQMJHm0ap/buafz///PObr+BvZsn7N+67vXXuusvU+PLo2eLnH9B/+1nW+31UOwDquwCDGvMn7iFi7iPH6VidqBD2F3FVIbm/04UAc8Bw+S4Cmu4UfFRQzFckxL0c7Gw6K2VcTHsAXfMQGfKkIzs7F4h+EIX1urgGMxbxPwOpbWhGbmN7AE79FbzHVZxAtwJ6mjuM41BG/AmaSdh/t5P2Xgo9iWcjoaXxqCx+AjIud92NkOPAIvMTHl6FRDaCbbhHF4nYrtW/YiH/FI3MTcP4S1kt/DYnwNgzw4GsXlQYJmblfgahEcH/u+QQZHMwnOgIjz4EeIIovPYDvG11zQh6SPTykKdVbSdwRPx/NkvAcHa4J34EjSzMfdquCpeJGMV+JKTfBGnE6a6HzRxWJ0jPgS9qaWeRzLaoKjN0ebfJJSlR0UHcE1OZXNS8G7cLiyi2aGsQtxaAyo6iioxxjWzGdHVTSOmXhVBMd8Pc7mXLxJ7a6j1xKDyZiUe74GF7J58ZBYmK4t2fv+nDQgFxtSXJ9u/3PgyHNcdbKxGScbRBuSOJlO5LQz8KxVxPF8Naak607cEj83BI/CWsS5HEdtf37Liqsho76sa78wvwHm7GMf/IDJ+wAAAABJRU5ErkJggg=="/>
+                                <span class="text nav-text">Motoristas</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom-content">
+                    <ul class="menu-links">
+                        <Link class="d-flex">
+                            <AuthenticatedLayout />
+                        </Link>
+                    </ul>
+                </div>
             </div>
-
-            <div class="menu-section">
-                <h5 class="text-white">Consultas</h5>
-                <ul class="menu-items">
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='user'></box-icon>Alunos</a>
-                    </li>
-
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='walk'></box-icon>Rotas</a>
-                    </li>
-
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='car'></box-icon>Motoristas</a>
-                    </li>
-
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='bell'></box-icon>Avisos</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="menu-section">
-                <h5 class="text-white">Validações</h5>
-                <ul class="menu-items">
-                    <li class="item">
-                        <a href="#"><box-icon color='rgba(255,255,255)' name='dollar'></box-icon>Pagamentos</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <nav class="navbar">
-            <box-icon name='left-arrow-alt' id="sidebar-close"></box-icon>
-            <AuthenticatedLayout />
         </nav>
     </div>
 </template>
-
 
 <script>
 import AuthenticatedLayout from './AuthenticatedLayout.vue';
@@ -66,138 +82,19 @@ export default {
     name: "Sidebar",
     components: { AuthenticatedLayout, Link },
     mounted() {
-        const sidebar = document.querySelector(".sidebar");
-        const sidebarClose = document.querySelector("#sidebar-close");
-        const menu = document.querySelector(".menu-content");
-        const menuItems = document.querySelectorAll(".submenu-item");
-        const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+        const body = document.querySelector('body');
+        const sidebar = body.querySelector('nav');
+        const toggle = body.querySelector(".toggle");
 
-        sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
-
-        menuItems.forEach((item, index) => {
-            item.addEventListener("click", () => {
-                menu.classList.add("submenu-active");
-                item.classList.add("show-submenu");
-                menuItems.forEach((item2, index2) => {
-                if (index !== index2) {
-                    item2.classList.remove("show-submenu");
-                }
-                });
-            });
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
         });
-
-        subMenuTitles.forEach((title) => {
-            title.addEventListener("click", () => {
-                menu.classList.remove("submenu-active");
-            });
-        });
-    }
-}
+    },
+};
 </script>
 
+
+
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-.sidebar {
-    position: fixed;
-    height: 100%;
-    width: 260px;
-    background: #11101d;
-    padding: 15px;
-    z-index: 99;
-}
-.logo {
-    font-size: 25px;
-    padding: 0 15px;
-}
-.sidebar a {
-    color: #fff;
-    text-decoration: none;
-}
 
-.menu-section {
-    margin-top: 40px;
-}
-
-.menu-items {
-    height: 100%;
-    width: 100%;
-    list-style: none;
-    transition: all 0.4s ease;
-}
-.submenu-active .menu-items {
-    transform: translateX(-56%);
-}
-
-.item a {
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    width: 100%;
-    border-radius: 12px;
-}
-
-.item i {
-    font-size: 12px;
-}
-.item a:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.submenu {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    right: calc(-100% - 26px);
-    height: calc(100% + 100vh);
-    background: #11101d;
-    display: none;
-    }
-.show-submenu ~ .submenu {
-    display: block;
-}
-
-.navbar,
-.main {
-    left: 260px;
-    width: calc(100% - 260px);
-    transition: all 0.5s ease;
-    z-index: 1000;
-}
-.sidebar.close ~ .navbar,
-.sidebar.close ~ .main {
-    left: 0;
-    width: 100%;
-}
-.navbar {
-    position: fixed;
-    color: #fff;
-    padding: 15px 20px;
-    font-size: 25px;
-    background: #4070f4;
-    cursor: pointer;
-}
-.navbar #sidebar-close {
-    cursor: pointer;
-}
-.main {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    z-index: 100;
-    background: #e7f2fd;
-}
-.main h1 {
-    color: #11101d;
-    font-size: 40px;
-    text-align: center;
-}
 </style>

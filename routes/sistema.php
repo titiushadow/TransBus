@@ -4,12 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
 
 Route::group([], function () {
-    Route::controller(SistemaController::class)->group(function () {
-        Route::get('/cad-alunos', [SistemaController::class, 'CadAlunos'])->name('CadAlunos');
-        Route::post('/cad_alunos', [SistemaController::class, 'store']);
-    });
+    Route::get('/cad-alunos', [SistemaController::class, 'CadAlunos'])->name('CadAlunos');
+    Route::get('/show_alunos', [SistemaController::class, 'ShowAlunos'])->name('ShowAlunos');
+    Route::post('/cad_alunos', [SistemaController::class, 'store'])->name('store_aluno');
 });
-
-
-
 ?>
