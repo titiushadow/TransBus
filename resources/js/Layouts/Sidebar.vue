@@ -4,7 +4,9 @@
             <header>
                 <div class="image-text">
                     <div class="text logo-text">
-                        <span class="name">TransBus</span>
+                        <Link :href="route('dashboard')" class="text-decoration-none text-dark">
+                            <span class="name">TransBus</span>
+                        </Link>
                     </div>
                 </div>
                 <i class='bx bx-chevron-right toggle'></i>
@@ -40,7 +42,7 @@
                     </div>
                     <ul class="menu-links">
                         <li class="nav-link d-flex">
-                            <Link :href="route('index')" class="d-flex align-items-center text-decoration-none gap-3">
+                            <Link :href="route('ShowAlunos')" class="d-flex align-items-center text-decoration-none gap-3">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAa1JREFUSEvN1k2ITlEYB/DfyKCkJsmONGShRFnZMaVYWJimbBTKR0nZSbEcSXZmarBhhZIppWYxC1YslFBmVvKVUkoWbCR06t5per13nnOne3ud7fPc/+88vZ1z3j49Wn09ci0GXoIRbCk2PYN7+FNniLrwTtzC5g5kFofxLBevAw9hCssqwn9gD57m4LnwSnzA6iD0IzbhZ4TnwsdxIwor6un3vx/15sLXcDIKK+pXcDbqzYWv40QUVtQncCrqzYXPYzQKK+rncDnqzYXTmX0dhRVneSPeRr25cMq5iSNB4FWcidBUrwMvL26o/RXBaWPH8LtpuNzoIRyYd6Y/4w4e5IBlT52J6+SGvf89vA7D2IoNWNox0i+8w0tM4lM0cjTxNlzCviioo/6wuL3Sq9V1LQSnm2oc/TXRsj09FEdxu9v3VfBB3F0kOP+zdLT2Yrozqxu8Fu+xogE4RXzFeqT3em51g8dwuiG0jLmAixH8BWsahp9jx0LwIN40jJZxq/C96uZKf+aetASno/mqCt6FRy3Bu/G4Ch7A9pbgF/hWBbdk/hsbXZmtbaRn8F8SWDwfL/V22AAAAABJRU5ErkJggg=="/>
                                 <span class="text nav-text">Alunos</span>
                             </Link>

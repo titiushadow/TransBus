@@ -12,10 +12,10 @@ class SistemaController extends Controller
         return inertia('Cadastros/CadAlunos');
     }
 
-    public function index()
+    public function ShowAlunos()
     {
-        $alunos = CadAluno::all(); // Renomeei a variável de $users para $alunos
-        return inertia('Show/ShowAlunos', ['alunos' => $alunos]); // Passo os alunos para a view 'ShowAlunos'
+        $alunos = CadAluno::all();
+        return inertia('Show/ShowAlunos', ['alunos' => $alunos]);
     }
 
     public function store(Request $request)
@@ -32,6 +32,6 @@ class SistemaController extends Controller
 
         CadAluno::create($validatedData);
 
-        return redirect()->route('index')->with('success', 'Aluno cadastrado com sucesso!'); // Redireciono para a rota 'index'
+        return redirect()->route('ShowAlunos')->with('success', 'Aluno cadastrado com sucesso!');
     }
 }
