@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class CadAlunoController extends Controller
 {
+    public function CadAlunos()
+    {
+        return inertia('Cadastros/CadAlunos');
+    }
+
+    public function ShowAlunos()
+    {
+        $alunos = CadAluno::all();
+        return inertia('Show/ShowAlunos', ['alunos' => $alunos]);
+    }
+
     public function index()
     {
         $users = CadAluno::all();
