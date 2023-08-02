@@ -52,6 +52,7 @@ import 'datatables.net-fixedheader-bs5';
 import 'datatables.net-buttons/js/buttons.html5.js';
 import 'jspdf';
 import 'jspdf-autotable';
+import ExcelJS from 'exceljs';
 
 export default {
     name: 'DataTables',
@@ -78,7 +79,7 @@ export default {
                     {
                         table: {
                             headerRows: 1,
-                            widths: [50, 100, 100, 100, 100],
+                            widths: [50, 100, 120, 100, 100],
                             body: [
                                 [
                                     { text: 'ID', style: 'tableHeader' },
@@ -126,6 +127,7 @@ export default {
                     tableText: {
                         fontSize: 10,
                         color: 'black',
+                        noWrap: true,
                     },
                 },
             };
@@ -133,26 +135,44 @@ export default {
             pdfMake.createPdf(pdf).download('Lista de Alunos.pdf');
         },
 
+        async exportarExcel() {
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet('Alunos');
 
-        exportarExcel() {
-            const csvContent = [
-            ['ID', 'Nome', 'Email', 'Instituição', 'CPF'],
-                ...this.alunos.map(aluno => [aluno.id, aluno.nome, aluno.email, aluno.instituicao, aluno.cpf])
-            ].map(row => row.join(','));
+            const headerRow = worksheet.addRow(['ID', 'Nome', 'Email', 'Instituição', 'CPF']);
+            headerRow.font = { bold: true };
+            headerRow.eachCell({ includeEmpty: true }, cell => {
+                cell.fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: { argb: 'FFCCCCCC' }
+                };
+            });
 
-            const csvData = "\uFEFF" + csvContent.join('\n');
+            worksheet.getColumn(1).width = 5;
+            worksheet.getColumn(2).width = 20;
+            worksheet.getColumn(3).width = 30;
+            worksheet.getColumn(4).width = 25;
+            worksheet.getColumn(5).width = 15;
 
-            const csvBlob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
-            const csvURL = URL.createObjectURL(csvBlob);
+            this.alunos.forEach(aluno => {
+                const dataRow = worksheet.addRow([aluno.id, aluno.nome, aluno.email, aluno.instituicao, aluno.cpf]);
+                dataRow.alignment = { vertical: 'middle', horizontal: 'left' };
+                dataRow.font = { size: 11 };
+                dataRow.height = 30;
+            });
+
+            const buffer = await workbook.xlsx.writeBuffer();
+
+            const excelBlob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const excelURL = URL.createObjectURL(excelBlob);
 
             const a = document.createElement('a');
-            a.href = csvURL;
-            a.download = 'Lista_de_Alunos.csv';
+            a.href = excelURL;
+            a.download = 'Lista_de_Alunos.xlsx';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-
-            pdfMake.createPdf(excel).download('Lista de Alunos.csv');
         },
 
         inicializarDataTables() {
@@ -188,7 +208,6 @@ export default {
 </script>
 
 <style>
-
 .docs-formats {
     display: flex;
     gap: 0.8rem;
