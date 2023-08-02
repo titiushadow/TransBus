@@ -25,7 +25,7 @@ class SistemaController extends Controller
             'instituicao' => 'required|string|max:255',
             'periodo' => 'required|string|max:255',
             'curso' => 'required|string|max:255',
-            'cpf' => 'required|string|max:255|cpf|unique:cad_alunos',
+            'cpf' => 'required|string|max:255',
             'destino' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:cad_alunos',
         ]);

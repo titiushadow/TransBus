@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
+use App\Http\Controllers\CadAlunoController;
+
 
 Route::group([], function () {
     Route::get('/cad-alunos', [SistemaController::class, 'CadAlunos'])->name('CadAlunos');
