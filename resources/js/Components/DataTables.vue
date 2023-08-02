@@ -7,6 +7,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Instituição</th>
                 <th scope="col">CPF</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,7 @@
                 <td>{{ aluno.email }}</td>
                 <td>{{ aluno.instituicao }}</td>
                 <td>{{ aluno.cpf }}</td>
+                <td> <button class="btn btn-primary btn-sm">Visualização</button></td>
             </tr>
         </tbody>
     </table>
@@ -66,8 +68,11 @@ name: 'DataTables',
 </script>
 
 <style>
-table {
+
+#DataTables {
     width: 100%;
+}
+table {
     border-collapse: collapse;
 }
 
@@ -75,6 +80,8 @@ th, td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+
 }
 
 th {
@@ -85,5 +92,10 @@ th {
 
 tr:hover {
     background-color: #f2f2f2;
+}
+
+.btn-sm {
+    font-size: 12px;
+    font-weight: bold;
 }
 </style>
