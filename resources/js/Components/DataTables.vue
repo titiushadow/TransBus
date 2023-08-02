@@ -1,11 +1,19 @@
 <template>
     <div>
-        <table id="DataTables" class="table table-striped table-bordered" style="width: 100%;">
+        <div class="docs-formats">
+            <button class="btn btn-success" @click="exportarExcel()">
+                <box-icon name='file-doc' type='solid' color='#fff' ></box-icon>
+            </button>
+
+            <button class="btn btn-danger" @click="exportarPDF()">
+                <box-icon name='file-pdf' type='solid' color='#fff' ></box-icon>
+            </button>
+        </div>
+        <table id="DataTables" class="table table-striped table-bordered w-50">
             <thead>
                 <tr>
                     <th colspan="6" class="table-title text-center">
                         <h5 class="fw-bold">Lista de Alunos</h5>
-                        <button class="btn btn-primary" @click="exportarPDF()">Exportar PDF</button>
                     </th>
                 </tr>
                 <tr>
@@ -49,8 +57,8 @@ export default {
     name: 'DataTables',
     props: {
         alunos: {
-        type: Array,
-        required: true,
+            type: Array,
+            required: true,
         },
     },
     mounted() {
@@ -59,8 +67,14 @@ export default {
     },
     methods: {
         exportarPDF() {
-            const docDefinition = {
+            const dataDeEmissao = new Date().toLocaleDateString();
+
+            const pdf = {
                 content: [
+                    {
+                        text: 'Lista de Alunos',
+                        style: 'titulo',
+                    },
                     {
                         table: {
                             headerRows: 1,
@@ -84,12 +98,30 @@ export default {
                             ],
                         },
                     },
+                    {
+                        text:'Data de emissão: ' + dataDeEmissao,
+                        style: 'dataEmissao',
+                    },
                 ],
                 styles: {
+                    titulo: {
+                        fontSize: 13,
+                        alignment: 'center',
+                        marginBottom: 10,
+                        bold: true
+                    },
+                    dataEmissao: {
+                        fontSize: 10,
+                        alignment: 'right',
+                        marginTop: 5,
+                        marginRight: 20,
+                        bold: true,
+                    },
                     tableHeader: {
                         bold: true,
                         fontSize: 12,
                         color: 'black',
+                        fillColor: '#ccc',
                     },
                     tableText: {
                         fontSize: 10,
@@ -98,7 +130,29 @@ export default {
                 },
             };
 
-            pdfMake.createPdf(docDefinition).download('Lista_de_Alunos.pdf');
+            pdfMake.createPdf(pdf).download('Lista de Alunos.pdf');
+        },
+
+
+        exportarExcel() {
+            const csvContent = [
+            ['ID', 'Nome', 'Email', 'Instituição', 'CPF'],
+                ...this.alunos.map(aluno => [aluno.id, aluno.nome, aluno.email, aluno.instituicao, aluno.cpf])
+            ].map(row => row.join(','));
+
+            const csvData = "\uFEFF" + csvContent.join('\n');
+
+            const csvBlob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+            const csvURL = URL.createObjectURL(csvBlob);
+
+            const a = document.createElement('a');
+            a.href = csvURL;
+            a.download = 'Lista_de_Alunos.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            pdfMake.createPdf(excel).download('Lista de Alunos.csv');
         },
 
         inicializarDataTables() {
@@ -108,7 +162,7 @@ export default {
 
             $(this.$el).find('table').DataTable({
                 paging: true,
-                pageLength: 10,
+                pageLength: 9,
                 language: {
                 search: 'Pesquisar:',
                 lengthMenu: '',
@@ -124,6 +178,9 @@ export default {
                 sInfoFiltered: '(filtrado de _MAX_ registros no total)',
                 sInfoEmpty: 'Mostrando 0 até 0 de 0 registros',
                 },
+                search: {
+                    input: '<input type="search" style="width: 300px;">'
+                },
             });
         },
     },
@@ -131,6 +188,13 @@ export default {
 </script>
 
 <style>
+
+.docs-formats {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -156,5 +220,26 @@ tr:hover {
 .btn-sm {
     font-size: 12px;
     font-weight: bold;
+}
+
+#DataTables_wrapper .dataTables_filter input {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+#DataTables_wrapper .dataTables_filter input:focus {
+    width: 100%;
+    max-width: 400px;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+#DataTables_wrapper .dataTables_scrollBody {
+    max-width: 100%;
 }
 </style>
