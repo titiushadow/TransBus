@@ -32,7 +32,11 @@
                     <td>{{ aluno.email }}</td>
                     <td>{{ aluno.instituicao }}</td>
                     <td>{{ aluno.cpf }}</td>
-                    <td><button class="btn btn-primary btn-sm">Visualização</button></td>
+                    <td>
+                        <Link :href="route('ViewAlunos')">
+                            <button class="btn btn-primary btn-sm">Visualização</button>
+                        </Link>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -53,9 +57,13 @@ import 'datatables.net-buttons/js/buttons.html5.js';
 import 'jspdf';
 import 'jspdf-autotable';
 import ExcelJS from 'exceljs';
+import { Link } from '@inertiajs/vue3';
 
 export default {
     name: 'DataTables',
+    components: {
+        Link,
+    },
     props: {
         alunos: {
             type: Array,
@@ -67,6 +75,10 @@ export default {
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
     },
     methods: {
+        selecionarAluno(aluno) {
+        this.$emit('atualizarAlunoSelecionado', aluno); // Emita 'atualizarAlunoSelecionado' em vez de 'alunoSelecionado'
+    },
+
         exportarPDF() {
             const dataDeEmissao = new Date().toLocaleDateString();
 

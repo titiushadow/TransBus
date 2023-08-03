@@ -18,6 +18,12 @@ class SistemaController extends Controller
         return inertia('Show/ShowAlunos', ['alunos' => $alunos]);
     }
 
+    public function ViewAlunos()
+    {
+        $alunos = CadAluno::all();
+        return inertia('View/ViewAlunos', ['alunos' => $alunos]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
