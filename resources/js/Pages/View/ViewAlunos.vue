@@ -9,7 +9,7 @@
                 <div class="background-img-alunos"></div>
                 <div class="d-flex align-center img-alunos">
                     <img src="/Images/cat.jpg" alt="cat">
-                    <h1 v-for="aluno in alunos" :key="aluno.id" >{{ aluno.nome }}</h1>
+                    <h1 :alunos="alunos">{{ aluno.nome }}</h1>
                 </div>
             </div>
         </section>
@@ -31,6 +31,11 @@ export default {
         alunos: {
             type: Object,
             required: true,
+        },
+    },
+    computed: {
+        aluno() {
+            return this.alunos[0] || {};
         },
     },
 };
