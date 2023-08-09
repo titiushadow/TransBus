@@ -1,16 +1,20 @@
 <template>
     <div>
-        <Head :alunos="alunos" @atualizarAlunoSelecionado="atualizarAlunoSelecionado">
-            <title>{{ aluno.nome }}</title>
-        </Head>
+        <Head title="Visualizar aluno" />
+
         <Sidebar />
 
-        <section class="d-flex justify-content-center align-items-center vh-100">
-            <h1>View Alunos</h1>
+        <section class="d-flex justify-content-center">
+            <div class="container-fluid">
+                <div class="background-img-alunos"></div>
+                <div class="d-flex align-center img-alunos">
+                    <img src="/Images/cat.jpg" alt="cat">
+                    <h1 v-for="aluno in alunos" :key="aluno.id" >{{ aluno.nome }}</h1>
+                </div>
+            </div>
         </section>
     </div>
 </template>
-
 
 <script>
 import Sidebar from '../../Layouts/Sidebar.vue';
@@ -23,21 +27,11 @@ export default {
         Head,
         DataTables,
     },
-    data() {
-        return {
-            alunoSelecionado: {
-                nome: '', // Deixe em branco inicialmente, será preenchido quando um aluno for selecionado
-            },
-            aluno: [
-
-            ],
-        };
-    },
-    methods: {
-        atualizarAlunoSelecionado(aluno) {
-            this.alunoSelecionado = aluno;
+    props: {
+        alunos: {
+            type: Object,
+            required: true,
         },
     },
-
 };
 </script>

@@ -12,7 +12,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import axios from 'axios';
-import { Head } from '@inertiajs/vue3'; // Importe o componente Head aqui
+import { Head } from '@inertiajs/vue3';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText;
 
