@@ -4,12 +4,24 @@
 
         <Sidebar />
 
-        <section class="d-flex justify-content-center">
+        <section class="d-flex justify-content-center flex-column">
             <div class="container-fluid">
                 <div class="background-img-alunos"></div>
                 <div class="d-flex align-center img-alunos">
                     <img src="/Images/cat.jpg" alt="cat">
-                    <h1 :alunos="alunos">{{ aluno.nome }}</h1>
+                    <div class="basic-info">
+                        <h3 class="text-dark">{{ aluno.nome }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full-info">
+                <div class="card">
+                    <h2 class="text-center py-1">Informações do {{ aluno.nome }}</h2>
+
+                    <div class="first-column">
+                        <h4 class="px-3">CPF:{{ aluno.cpf }}</h4>
+                    </div>
                 </div>
             </div>
         </section>
@@ -35,8 +47,30 @@ export default {
     },
     computed: {
         aluno() {
-            return this.alunos[0] || {};
+            // Supondo que você queira exibir apenas o primeiro aluno da lista
+            return this.alunos[0];
         },
     },
 };
 </script>
+
+<style>
+
+.card {
+    background-color: white;
+    border: 3px solid #000;
+    width: 60rem;
+    height: 30rem;
+    position: absolute;
+    top: 29%;
+    right: 11%;
+
+}
+
+.full-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+</style>

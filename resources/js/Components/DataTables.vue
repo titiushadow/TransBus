@@ -74,147 +74,142 @@ export default {
         this.inicializarDataTables();
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
     },
-    methods: {
-        selecionarAluno(aluno) {
-        this.$emit('atualizarAlunoSelecionado', aluno); // Emita 'atualizarAlunoSelecionado' em vez de 'alunoSelecionado'
+
+    exportarPDF() {
+        const dataDeEmissao = new Date().toLocaleDateString();
+
+        const pdf = {
+            content: [
+                {
+                    text: 'Lista de Alunos',
+                    style: 'titulo',
+                },
+                {
+                    table: {
+                        headerRows: 1,
+                        widths: [50, 100, 120, 100, 100],
+                        body: [
+                            [
+                                { text: 'ID', style: 'tableHeader' },
+                                { text: 'Nome', style: 'tableHeader' },
+                                { text: 'Email', style: 'tableHeader' },
+                                { text: 'Instituição', style: 'tableHeader' },
+                                { text: 'CPF', style: 'tableHeader' },
+                            ],
+                            // Dados dos alunos
+                            ...this.alunos.map(aluno => [
+                                { text: aluno.id, style: 'tableText' },
+                                { text: aluno.nome, style: 'tableText' },
+                                { text: aluno.email, style: 'tableText' },
+                                { text: aluno.instituicao, style: 'tableText' },
+                                { text: aluno.cpf, style: 'tableText' },
+                            ]),
+                        ],
+                    },
+                },
+                {
+                    text:'Data de emissão: ' + dataDeEmissao,
+                    style: 'dataEmissao',
+                },
+            ],
+            styles: {
+                titulo: {
+                    fontSize: 13,
+                    alignment: 'center',
+                    marginBottom: 10,
+                    bold: true
+                },
+                dataEmissao: {
+                    fontSize: 10,
+                    alignment: 'right',
+                    marginTop: 5,
+                    marginRight: 20,
+                    bold: true,
+                },
+                tableHeader: {
+                    bold: true,
+                    fontSize: 12,
+                    color: 'black',
+                    fillColor: '#ccc',
+                },
+                tableText: {
+                    fontSize: 10,
+                    color: 'black',
+                    noWrap: true,
+                },
+            },
+        };
+
+        pdfMake.createPdf(pdf).download('Lista de Alunos.pdf');
     },
 
-        exportarPDF() {
-            const dataDeEmissao = new Date().toLocaleDateString();
+    async exportarExcel() {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Alunos');
 
-            const pdf = {
-                content: [
-                    {
-                        text: 'Lista de Alunos',
-                        style: 'titulo',
-                    },
-                    {
-                        table: {
-                            headerRows: 1,
-                            widths: [50, 100, 120, 100, 100],
-                            body: [
-                                [
-                                    { text: 'ID', style: 'tableHeader' },
-                                    { text: 'Nome', style: 'tableHeader' },
-                                    { text: 'Email', style: 'tableHeader' },
-                                    { text: 'Instituição', style: 'tableHeader' },
-                                    { text: 'CPF', style: 'tableHeader' },
-                                ],
-                                // Dados dos alunos
-                                ...this.alunos.map(aluno => [
-                                    { text: aluno.id, style: 'tableText' },
-                                    { text: aluno.nome, style: 'tableText' },
-                                    { text: aluno.email, style: 'tableText' },
-                                    { text: aluno.instituicao, style: 'tableText' },
-                                    { text: aluno.cpf, style: 'tableText' },
-                                ]),
-                            ],
-                        },
-                    },
-                    {
-                        text:'Data de emissão: ' + dataDeEmissao,
-                        style: 'dataEmissao',
-                    },
-                ],
-                styles: {
-                    titulo: {
-                        fontSize: 13,
-                        alignment: 'center',
-                        marginBottom: 10,
-                        bold: true
-                    },
-                    dataEmissao: {
-                        fontSize: 10,
-                        alignment: 'right',
-                        marginTop: 5,
-                        marginRight: 20,
-                        bold: true,
-                    },
-                    tableHeader: {
-                        bold: true,
-                        fontSize: 12,
-                        color: 'black',
-                        fillColor: '#ccc',
-                    },
-                    tableText: {
-                        fontSize: 10,
-                        color: 'black',
-                        noWrap: true,
-                    },
-                },
+        const headerRow = worksheet.addRow(['ID', 'Nome', 'Email', 'Instituição', 'CPF']);
+        headerRow.font = { bold: true };
+        headerRow.eachCell({ includeEmpty: true }, cell => {
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'FFCCCCCC' }
             };
+        });
 
-            pdfMake.createPdf(pdf).download('Lista de Alunos.pdf');
-        },
+        worksheet.getColumn(1).width = 5;
+        worksheet.getColumn(2).width = 20;
+        worksheet.getColumn(3).width = 30;
+        worksheet.getColumn(4).width = 25;
+        worksheet.getColumn(5).width = 15;
 
-        async exportarExcel() {
-            const workbook = new ExcelJS.Workbook();
-            const worksheet = workbook.addWorksheet('Alunos');
+        this.alunos.forEach(aluno => {
+            const dataRow = worksheet.addRow([aluno.id, aluno.nome, aluno.email, aluno.instituicao, aluno.cpf]);
+            dataRow.alignment = { vertical: 'middle', horizontal: 'left' };
+            dataRow.font = { size: 11 };
+            dataRow.height = 30;
+        });
 
-            const headerRow = worksheet.addRow(['ID', 'Nome', 'Email', 'Instituição', 'CPF']);
-            headerRow.font = { bold: true };
-            headerRow.eachCell({ includeEmpty: true }, cell => {
-                cell.fill = {
-                    type: 'pattern',
-                    pattern: 'solid',
-                    fgColor: { argb: 'FFCCCCCC' }
-                };
-            });
+        const buffer = await workbook.xlsx.writeBuffer();
 
-            worksheet.getColumn(1).width = 5;
-            worksheet.getColumn(2).width = 20;
-            worksheet.getColumn(3).width = 30;
-            worksheet.getColumn(4).width = 25;
-            worksheet.getColumn(5).width = 15;
+        const excelBlob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const excelURL = URL.createObjectURL(excelBlob);
 
-            this.alunos.forEach(aluno => {
-                const dataRow = worksheet.addRow([aluno.id, aluno.nome, aluno.email, aluno.instituicao, aluno.cpf]);
-                dataRow.alignment = { vertical: 'middle', horizontal: 'left' };
-                dataRow.font = { size: 11 };
-                dataRow.height = 30;
-            });
+        const a = document.createElement('a');
+        a.href = excelURL;
+        a.download = 'Lista_de_Alunos.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    },
 
-            const buffer = await workbook.xlsx.writeBuffer();
+    inicializarDataTables() {
+        if ($.fn.DataTable.isDataTable('#DataTables')) {
+            $(this.$el).DataTable().destroy();
+        }
 
-            const excelBlob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            const excelURL = URL.createObjectURL(excelBlob);
-
-            const a = document.createElement('a');
-            a.href = excelURL;
-            a.download = 'Lista_de_Alunos.xlsx';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        },
-
-        inicializarDataTables() {
-            if ($.fn.DataTable.isDataTable('#DataTables')) {
-                $(this.$el).DataTable().destroy();
-            }
-
-            $(this.$el).find('table').DataTable({
-                paging: true,
-                pageLength: 9,
-                language: {
-                search: 'Pesquisar:',
-                lengthMenu: '',
-                info: 'Mostrando página _PAGE_ de _PAGES_',
-                paginate: {
-                    first: 'Primeira',
-                    last: 'Última',
-                    next: 'Próxima',
-                    previous: 'Anterior',
-                },
-                emptyTable: 'Nenhum registro encontrado',
-                zeroRecords: 'Nenhum registro correspondente encontrado',
-                sInfoFiltered: '(filtrado de _MAX_ registros no total)',
-                sInfoEmpty: 'Mostrando 0 até 0 de 0 registros',
-                },
-                search: {
-                    input: '<input type="search" style="width: 300px;">'
-                },
-            });
-        },
+        $(this.$el).find('table').DataTable({
+            paging: true,
+            pageLength: 9,
+            language: {
+            search: 'Pesquisar:',
+            lengthMenu: '',
+            info: 'Mostrando página _PAGE_ de _PAGES_',
+            paginate: {
+                first: 'Primeira',
+                last: 'Última',
+                next: 'Próxima',
+                previous: 'Anterior',
+            },
+            emptyTable: 'Nenhum registro encontrado',
+            zeroRecords: 'Nenhum registro correspondente encontrado',
+            sInfoFiltered: '(filtrado de _MAX_ registros no total)',
+            sInfoEmpty: 'Mostrando 0 até 0 de 0 registros',
+            },
+            search: {
+                input: '<input type="search" style="width: 300px;">'
+            },
+        });
     },
 };
 </script>

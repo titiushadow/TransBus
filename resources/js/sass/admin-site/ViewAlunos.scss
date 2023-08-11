@@ -4,7 +4,7 @@ section {
 
 .background-img-alunos {
     width: 100vw;
-    height: 10rem;
+    height: 9rem;
     background-color: #0099FF;
     margin: 0;
     position: relative;
@@ -17,3 +17,10 @@ section {
     position: absolute;
     top: 5rem;
 }
+
+.basic-info {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
