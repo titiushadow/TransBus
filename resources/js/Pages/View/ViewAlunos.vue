@@ -18,9 +18,18 @@
             <div class="full-info">
                 <div class="card">
                     <h2 class="text-center py-1">Informações do {{ aluno.nome }}</h2>
+                    <div class="all-column">
+                        <div class="first-column">
+                            <h4 class="px-3">CPF:{{ aluno.cpf }}</h4>
+                            <h4 class="px-3">Instituição:{{ aluno.instituicao }}</h4>
+                            <h4 class="px-3">Periodo:{{ aluno.periodo }}</h4>
+                        </div>
 
-                    <div class="first-column">
-                        <h4 class="px-3">CPF:{{ aluno.cpf }}</h4>
+                        <div class="second-column">
+                            <h4 class="px-3">Curso:{{ aluno.curso }}</h4>
+                            <h4 class="px-3">Destino:{{ aluno.destino }}</h4>
+                            <h4 class="px-3">Email:{{ aluno.email }}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,6 +80,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.all-column {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
 }
 
 </style>
