@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav class="sidebar close">
+        <nav class="sidebar close shadow-lg">
             <header>
                 <div class="image-text">
                     <div class="text logo-text">
